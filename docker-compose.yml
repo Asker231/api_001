@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:16.4
+    container_name: api_01
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=199823
+    ports:
+      - "5432:5432"
+      
