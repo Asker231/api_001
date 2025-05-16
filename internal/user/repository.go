@@ -13,7 +13,6 @@ type RepositoryUser struct{
 
 
 func NewRepo(db *gorm.DB)*RepositoryUser{
-
 	return &RepositoryUser{
 		Db: db,
 	}
@@ -21,18 +20,11 @@ func NewRepo(db *gorm.DB)*RepositoryUser{
 
 
 func(r *RepositoryUser)CreateUser(user *UserModel)(*UserModel,error){
-
-	userExist ,err := r.UserExist(user.Email)
-
-	if err != nil{
-		fmt.Println(err)
-		return nil,err
-	}
-
+	userExist,_:= r.UserExist(user.Email)
 	if userExist != nil{
+		fmt.Println("UserExist")
 		return nil,errors.New("Пользователь уже существует")
 	}
-
 	r.Db.Create(&user)
 
 	return user,nil

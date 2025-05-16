@@ -6,6 +6,7 @@ import (
 
 	"github.com/Asker231/api_001.git/configs"
 	"github.com/Asker231/api_001.git/internal/auth"
+	"github.com/Asker231/api_001.git/internal/user"
 	"github.com/Asker231/api_001.git/pkg/db"
 	"github.com/gin-gonic/gin"
 )
@@ -17,14 +18,14 @@ func main(){
 	//config 
 	cnf := configs.NewConfig()
 	//db
-	_ = db.NewConnectDb(&cnf.DataBase)
+	database := db.NewConnectDb(&cnf.DataBase)
 
 	//repo
-
+	userRepo := user.NewRepo(database.DataBase)
 	//service
-
+	authService := auth.NewService(userRepo)
 	//handlers
-	auth.NewAuthHandler(v1)
+	auth.NewAuthHandler(v1,authService)
 
 
 
