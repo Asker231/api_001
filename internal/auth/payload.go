@@ -16,5 +16,7 @@ type (
 )
 //response
 type(
-	
+		RegisterResponse struct{
+			
+		}
 )
